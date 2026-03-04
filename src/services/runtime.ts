@@ -215,6 +215,7 @@ const APP_HOSTS = new Set([
   'api.worldmonitor.app',
   'localhost',
   '127.0.0.1',
+  ...(typeof window !== 'undefined' ? [window.location.hostname] : []),
   ...extractHostnames(WS_API_URL, ENV.VITE_WS_RELAY_URL),
 ]);
 
