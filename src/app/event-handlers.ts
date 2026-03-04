@@ -217,20 +217,17 @@ export class EventHandlerManager implements AppModule {
       trackThemeChanged(next);
     });
 
-    const isLocalDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-    if (this.ctx.isDesktopApp || isLocalDev) {
-      this.ctx.container.querySelectorAll<HTMLAnchorElement>('.variant-option').forEach(link => {
-        link.addEventListener('click', (e) => {
-          const variant = link.dataset.variant;
-          if (variant && variant !== SITE_VARIANT) {
-            e.preventDefault();
-            trackVariantSwitch(SITE_VARIANT, variant);
-            localStorage.setItem('worldmonitor-variant', variant);
-            window.location.reload();
-          }
-        });
+    this.ctx.container.querySelectorAll<HTMLAnchorElement>('.variant-option').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const variant = link.dataset.variant;
+        if (variant && variant !== SITE_VARIANT) {
+          e.preventDefault();
+          trackVariantSwitch(SITE_VARIANT, variant);
+          localStorage.setItem('worldmonitor-variant', variant);
+          window.location.reload();
+        }
       });
-    }
+    });
 
     const fullscreenBtn = document.getElementById('fullscreenBtn');
     if (!this.ctx.isDesktopApp && fullscreenBtn) {

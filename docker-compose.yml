@@ -1,0 +1,24 @@
+services:
+  worldmonitor:
+    build: .
+    container_name: worldmonitor
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.worldmonitor.rule=Host(`monitor.goodthoughts.in`)"
+      - "traefik.http.routers.worldmonitor.entrypoints=websecure"
+      - "traefik.http.routers.worldmonitor.tls.certresolver=letsencrypt"
+      - "traefik.http.services.worldmonitor.loadbalancer.server.port=3000"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  web:
+    external: true

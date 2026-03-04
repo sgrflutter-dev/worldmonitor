@@ -67,7 +67,7 @@ export class DesktopUpdater implements AppModule {
 
   private async checkForUpdate(): Promise<void> {
     try {
-      const res = await fetch('https://worldmonitor.app/api/version');
+      const res = await fetch('/api/version');
       if (!res.ok) {
         this.logUpdaterOutcome('fetch_failed', { status: res.status });
         return;

@@ -116,7 +116,7 @@ export class PanelLayoutManager implements AppModule {
       <div class="header">
         <div class="header-left">
           <div class="variant-switcher">${(() => {
-        const local = this.ctx.isDesktopApp || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+        const local = this.ctx.isDesktopApp || location.hostname === 'localhost' || location.hostname === '127.0.0.1' || !location.hostname.endsWith('worldmonitor.app');
         const vHref = (v: string, prod: string) => local || SITE_VARIANT === v ? '#' : prod;
         const vTarget = (_v: string) => '';
         return `
