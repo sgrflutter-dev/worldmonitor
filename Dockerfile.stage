@@ -1,0 +1,69 @@
+# =============================================================================
+# World Monitor — Good Thoughts STAGE image (served under /monitor)
+# =============================================================================
+# Mirrors the prod root Dockerfile (nginx static + node /api sidecar under
+# supervisord) but builds the Vite frontend with base '/monitor/' and a
+# prefix-aware nginx config so it works behind Traefik with
+#   Host(stage.goodthoughts.in) && PathPrefix(/monitor)   (NO StripPrefix).
+# =============================================================================
+
+# ── Stage 1: Builder ─────────────────────────────────────────────────────────
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
+
+COPY . .
+
+# Compile TS API handlers → ESM bundles (api/**/*.js alongside sources)
+RUN node docker/build-handlers.mjs
+
+# Build the Vite frontend under the /monitor base path.
+ENV VITE_BASE_PATH=/monitor/
+RUN npx tsc && npx vite build
+
+# ── Stage 2: Runtime ─────────────────────────────────────────────────────────
+FROM node:22-alpine AS final
+
+RUN apk add --no-cache nginx supervisor gettext && \
+    mkdir -p /tmp/nginx-client-body /tmp/nginx-proxy /tmp/nginx-fastcgi \
+             /tmp/nginx-uwsgi /tmp/nginx-scgi /var/log/supervisor && \
+    addgroup -S appgroup && adduser -S appuser -G appgroup
+
+WORKDIR /app
+
+# Node API sidecar
+COPY --from=builder /app/src-tauri/sidecar/local-api-server.mjs ./local-api-server.mjs
+COPY --from=builder /app/src-tauri/sidecar/package.json ./package.json
+
+# API handler modules + runtime data files used by handlers
+COPY --from=builder /app/api ./api
+COPY --from=builder /app/data ./data
+
+# Built frontend — placed under html/monitor/ so /monitor/* asset URLs map to
+# real files (mirrors the blog /blog/ layout).
+COPY --from=builder /app/dist /usr/share/nginx/html/monitor
+
+# Prefix-aware nginx + supervisord configs
+COPY docker/nginx.conf.monitor /etc/nginx/nginx.conf.template
+COPY docker/supervisord.conf /etc/supervisor/conf.d/worldmonitor.conf
+COPY docker/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh && \
+    rm -f /etc/nginx/http.d/default.conf
+
+RUN chown -R appuser:appgroup /app /tmp/nginx-client-body /tmp/nginx-proxy \
+    /tmp/nginx-fastcgi /tmp/nginx-uwsgi /tmp/nginx-scgi /var/log/supervisor \
+    /var/lib/nginx /var/log/nginx
+
+USER appuser
+
+EXPOSE 8080
+
+# Probe the static SPA root (mirrors prod compose healthcheck). /api/health
+# requires Redis, which stage does not provide, so it must NOT gate health.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD wget --spider -q http://127.0.0.1:8080/monitor/ || exit 1
+
+CMD ["/app/entrypoint.sh"]

@@ -1,6 +1,23 @@
 import './styles/base-layer.css';
 import './styles/happy-theme.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import './styles/goodthoughts-theme.css';
+
+// Good Thoughts unified shell: when served under a sub-path (e.g. /monitor/)
+// flag the document so the light Good Thoughts theme override applies and the
+// app matches its sibling sections. No-op for standalone/prod/desktop ("/").
+(() => {
+  try {
+    const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+    if (base && typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-gt-shell', '');
+      // Force the light surface to match the shell's siblings.
+      if (!document.documentElement.dataset.theme) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    }
+  } catch { /* no-op */ }
+})();
 import * as Sentry from '@sentry/browser';
 import { inject } from '@vercel/analytics';
 import { App } from './App';

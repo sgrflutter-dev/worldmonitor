@@ -1,4 +1,5 @@
 import type { FeatureCollection, Geometry, GeoJsonProperties, Position } from 'geojson';
+import { withBase } from '@/services/runtime';
 
 interface IndexedCountryGeometry {
   code: string;
@@ -252,7 +253,7 @@ async function ensureLoaded(): Promise<void> {
     if (typeof fetch !== 'function') return;
 
     try {
-      const response = await fetch(COUNTRY_GEOJSON_URL);
+      const response = await fetch(withBase(COUNTRY_GEOJSON_URL));
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }

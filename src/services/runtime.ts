@@ -182,6 +182,29 @@ export function toRuntimeUrl(path: string): string {
   return `${baseUrl}${path}`;
 }
 
+/**
+ * Deployment base path (e.g. "/monitor/" for the Good Thoughts unified shell,
+ * "/" for standalone/prod/desktop). Injected by Vite from VITE_BASE_PATH.
+ * Trailing slash is stripped so callers can concatenate root-absolute paths.
+ */
+const DEPLOY_BASE = (() => {
+  const raw = (ENV.BASE_URL as string | undefined) || '/';
+  return raw === '/' ? '' : raw.replace(/\/$/, '');
+})();
+
+/**
+ * Prefix a root-absolute app path (e.g. "/data/countries.geojson",
+ * "/map-styles/foo.json") with the deployment base path so static assets
+ * resolve when the app is served under a sub-path. No-op when base is "/".
+ * Desktop (tauri) runtime always serves at root, so base is empty there.
+ */
+export function withBase(path: string): string {
+  if (!path.startsWith('/') || !DEPLOY_BASE) {
+    return path;
+  }
+  return `${DEPLOY_BASE}${path}`;
+}
+
 export function toApiUrl(path: string): string {
   if (!path.startsWith('/')) {
     return path;
@@ -193,7 +216,10 @@ export function toApiUrl(path: string): string {
 
   const webApiBase = getConfiguredWebApiBaseUrl();
   if (!webApiBase) {
-    return path;
+    // No remote API base configured (self-hosted / sub-path deploy):
+    // keep the call same-origin but honor the deployment base path so it
+    // routes through the reverse proxy under e.g. /monitor/api/*.
+    return withBase(path);
   }
 
   return `${webApiBase}${path}`;

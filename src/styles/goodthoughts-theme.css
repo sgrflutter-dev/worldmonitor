@@ -1,0 +1,73 @@
+/**
+ * Good Thoughts "Digital Curator" theme override for World Monitor.
+ *
+ * Applied ONLY when the app is served inside the unified Good Thoughts shell
+ * (sub-path deploy), signalled by <html data-gt-shell>. It maps the canonical
+ * Good Thoughts palette onto World Monitor's existing CSS-variable tokens and
+ * forces the light surface so the app visually matches its sibling sections
+ * (finance, markets, blog). It intentionally does NOT restyle individual
+ * components — only the shared token layer — so the app keeps working.
+ *
+ * Canonical palette (see goodthoughts-platform/shell/tokens.css):
+ *   primary #004532 · primary-container #065f46 · surface #faf8ff
+ *   on-surface #131b2e · accent green · fonts Inter + Lora
+ */
+
+:root[data-gt-shell] {
+  --gt-primary: #004532;
+  --gt-primary-container: #065f46;
+  --gt-surface: #faf8ff;
+  --gt-on-surface: #131b2e;
+  --gt-accent-green: #065f46;
+
+  --gt-font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --gt-font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+}
+
+/* Map Good Thoughts tokens onto World Monitor's token layer.
+   Light surfaces, deep-green accent, lavender-white backgrounds. */
+:root[data-gt-shell],
+:root[data-gt-shell][data-theme="light"] {
+  --bg: #faf8ff;
+  --bg-secondary: #f2f3ff;
+  --surface: #ffffff;
+  --surface-hover: #f2f3ff;
+  --surface-active: #eaedff;
+
+  --text: #131b2e;
+  --text-secondary: #2a3346;
+  --text-dim: #3f4944;
+  --text-muted: #6f7973;
+  --text-faint: #9aa3b2;
+  --text-ghost: #bec9c2;
+  --accent: #004532;
+
+  --panel-bg: #ffffff;
+  --panel-border: #dae2fd;
+}
+
+/* Good Thoughts uses Inter (body) + Lora (display/serif). */
+:root[data-gt-shell] body,
+:root[data-gt-shell] {
+  font-family: var(--gt-font-body);
+}
+
+/* Deep-green accent for interactive/brand elements that read --accent. */
+:root[data-gt-shell] .site-footer-name {
+  color: var(--gt-primary);
+  font-family: var(--gt-font-serif);
+  letter-spacing: 0.02em;
+}
+
+/* Thin Good Thoughts brand bar so the section reads as part of the shell. */
+:root[data-gt-shell] body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gt-primary) 0%, var(--gt-primary-container) 100%);
+  z-index: 99999;
+  pointer-events: none;
+}

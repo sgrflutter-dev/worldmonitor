@@ -609,7 +609,14 @@ export default defineConfig(({ mode }) => {
   const activeVariant = process.env.VITE_VARIANT || 'full';
   const activeMeta = VARIANT_META[activeVariant] || VARIANT_META.full;
 
+  // Sub-path deployment support (Good Thoughts unified shell).
+  // When VITE_BASE_PATH is set (e.g. "/monitor/") Vite prefixes all asset/HTML
+  // URLs and exposes it via import.meta.env.BASE_URL. Defaults to "/" so prod,
+  // desktop (tauri) and standalone builds are unaffected.
+  const basePath = process.env.VITE_BASE_PATH || '/';
+
   return {
+    base: basePath,
     define: {
       __APP_VERSION__: JSON.stringify(pkg.version),
     },
@@ -635,17 +642,17 @@ export default defineConfig(({ mode }) => {
           name: `${activeMeta.siteName} - ${activeMeta.subject}`,
           short_name: activeMeta.shortName,
           description: activeMeta.description,
-          start_url: '/',
-          scope: '/',
+          start_url: basePath,
+          scope: basePath,
           display: 'standalone',
           orientation: 'any',
           theme_color: '#0a0f0a',
           background_color: '#0a0f0a',
           categories: activeMeta.categories,
           icons: [
-            { src: '/favico/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
-            { src: '/favico/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
-            { src: '/favico/android-chrome-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+            { src: `${basePath}favico/android-chrome-192x192.png`, sizes: '192x192', type: 'image/png' },
+            { src: `${basePath}favico/android-chrome-512x512.png`, sizes: '512x512', type: 'image/png' },
+            { src: `${basePath}favico/android-chrome-512x512.png`, sizes: '512x512', type: 'image/png', purpose: 'maskable' },
           ],
         },
 

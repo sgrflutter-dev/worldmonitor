@@ -1,0 +1,105 @@
+worker_processes auto;
+error_log /dev/stderr warn;
+pid /tmp/nginx.pid;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  include       /etc/nginx/mime.types;
+  default_type  application/octet-stream;
+
+  log_format main '$remote_addr - [$time_local] "$request" $status $body_bytes_sent';
+  access_log /dev/stdout main;
+
+  sendfile on;
+  tcp_nopush on;
+  keepalive_timeout 65;
+
+  # Serve pre-compressed assets (gzip .gz — built by vite brotliPrecompressPlugin)
+  gzip_static on;
+  gzip on;
+  gzip_comp_level 5;
+  gzip_min_length 1024;
+  gzip_vary on;
+  gzip_types application/json application/javascript text/css text/plain application/xml text/xml image/svg+xml;
+
+  # Temp dirs writable by non-root
+  client_body_temp_path /tmp/nginx-client-body;
+  proxy_temp_path /tmp/nginx-proxy;
+  fastcgi_temp_path /tmp/nginx-fastcgi;
+  uwsgi_temp_path /tmp/nginx-uwsgi;
+  scgi_temp_path /tmp/nginx-scgi;
+
+  server {
+    listen 8080;
+
+    # Built frontend lives under html/monitor/ so that the Vite base ('/monitor/')
+    # asset URLs map 1:1 onto real files (mirrors the blog /blog/ pattern).
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # ── API proxy → Node.js sidecar ──────────────────────────────────────────
+    # The frontend (via toApiUrl + withBase) calls /monitor/api/*. The Node
+    # sidecar matches BARE /api/* routes (it does pathname.replace(/^\/api/,'')),
+    # so we STRIP the /monitor prefix here before proxying. Trailing slash on
+    # proxy_pass performs the rewrite: /monitor/api/foo -> /api/foo.
+    location /monitor/api/ {
+      proxy_pass http://127.0.0.1:${LOCAL_API_PORT}/api/;
+      proxy_http_version 1.1;
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      # Pass Origin as localhost so api-key/CORS checks pass for browser requests.
+      proxy_set_header Origin http://localhost;
+      proxy_read_timeout 120s;
+      proxy_send_timeout 120s;
+    }
+
+    # ── Hashed Vite assets — immutable cache ─────────────────────────────────
+    location /monitor/assets/ {
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Cache-Control "public, max-age=31536000, immutable";
+      try_files $uri =404;
+    }
+
+    # ── Build-time static dirs (copied from public/ into dist) ───────────────
+    location /monitor/map-styles/ {
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Cache-Control "public, max-age=31536000, immutable";
+      try_files $uri =404;
+    }
+    location /monitor/textures/ {
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Cache-Control "public, max-age=31536000, immutable";
+      try_files $uri =404;
+    }
+    location /monitor/data/ {
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Cache-Control "public, max-age=31536000, immutable";
+      try_files $uri =404;
+    }
+    location /monitor/favico/ {
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Cache-Control "public, max-age=2592000";
+      try_files $uri =404;
+    }
+
+    # ── SPA + multipage fallback under /monitor/ ─────────────────────────────
+    # Real files (incl. settings.html, live-channels.html) served directly;
+    # everything else falls back to the SPA shell at /monitor/index.html.
+    location /monitor/ {
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header X-Frame-Options "SAMEORIGIN" always;
+      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+      add_header Cache-Control "no-cache, no-store, must-revalidate";
+      add_header Permissions-Policy "storage-access=(self \"https://www.youtube.com\" \"https://youtube.com\")";
+      try_files $uri $uri/ /monitor/index.html;
+    }
+
+    # ── Normalize bare /monitor and any stray root hit to /monitor/ ──────────
+    location = /monitor { return 308 /monitor/; }
+    location = /        { return 308 /monitor/; }
+  }
+}
