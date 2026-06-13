@@ -19,6 +19,12 @@
       :root[data-gt-shell] .gt-shell-nav__link--active{color:#004532;font-weight:700;border-bottom:2px solid #004532}
       :root[data-gt-shell] .gt-shell-nav__signin{flex-shrink:0;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:0.75rem;line-height:1;letter-spacing:0.05em;text-transform:uppercase;font-weight:600;text-decoration:none;color:#004532;padding:6px 12px;border-radius:8px}
       :root[data-gt-shell] .gt-shell-nav__signin:hover{background:rgba(209,250,229,0.6)}
+      :root[data-gt-shell] .gt-shell-nav__identity{display:flex;align-items:center;gap:10px;flex-shrink:0}
+      :root[data-gt-shell] .gt-shell-nav__name{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:0.875rem;font-weight:500;color:#131b2e}
+      :root[data-gt-shell] .gt-shell-nav__avatar{width:36px;height:36px;border-radius:9999px;display:grid;place-items:center;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:0.75rem;font-weight:700;color:#fff;background:#004532}
+      :root[data-gt-shell] .gt-shell-nav__logout{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:0.75rem;line-height:1;letter-spacing:0.05em;text-transform:uppercase;font-weight:600;color:#3f4944;background:none;border:none;cursor:pointer;padding:6px 12px;border-radius:8px}
+      :root[data-gt-shell] .gt-shell-nav__logout:hover{background:rgba(209,250,229,0.6)}
+      @media (max-width:639px){:root[data-gt-shell] .gt-shell-nav__name{display:none}}
       @media (max-width:767px){:root[data-gt-shell] .gt-shell-nav__links{display:none}}
       :root[data-gt-shell] body{padding-top:56px}
     </style>
@@ -32,9 +38,12 @@
           <a class="gt-shell-nav__link" href="/blog">Blog</a>
           <a class="gt-shell-nav__link gt-shell-nav__link--active" href="/monitor" aria-current="page">Monitor</a>
         </div>
-        <a class="gt-shell-nav__signin" href="/auth">Sign in</a>
+        <div class="gt-shell-nav__identity" id="gtIdentity">
+          <a class="gt-shell-nav__signin" href="/auth">Sign in</a>
+        </div>
       </div>
     </nav>
+    <script src="/gt-identity.js"></script>
     <div class="settings-shell">
       <div class="settings-titlebar"></div>
       <div class="settings-header">
