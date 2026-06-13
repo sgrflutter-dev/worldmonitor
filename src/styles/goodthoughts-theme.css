@@ -59,15 +59,6 @@
   letter-spacing: 0.02em;
 }
 
-/* Thin Good Thoughts brand bar so the section reads as part of the shell. */
-:root[data-gt-shell] body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gt-primary) 0%, var(--gt-primary-container) 100%);
-  z-index: 99999;
-  pointer-events: none;
-}
+/* The thin Good Thoughts brand bar was superseded by the full shared product
+   nav injected statically in index.html (.gt-shell-nav). Removed here so the
+   section shows a single bar, not two stacked ones. */

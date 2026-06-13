@@ -615,13 +615,23 @@ export default defineConfig(({ mode }) => {
   // desktop (tauri) and standalone builds are unaffected.
   const basePath = process.env.VITE_BASE_PATH || '/';
 
+  // Good Thoughts unified shell: when served under a sub-path (e.g. "/monitor/")
+  // the section must read as "Monitor · Good Thoughts" in the browser tab and
+  // share cards. Override ONLY the HTML title/site-name meta — the PWA manifest
+  // `name`/`short_name` still use the original `activeMeta` (below) so the
+  // desktop/PWA identity is unchanged. NO-OP for the normal build (basePath "/").
+  const isGtShellBuild = basePath !== '/';
+  const htmlMeta: VariantMeta = isGtShellBuild
+    ? { ...activeMeta, title: 'Monitor · Good Thoughts', siteName: 'Good Thoughts' }
+    : activeMeta;
+
   return {
     base: basePath,
     define: {
       __APP_VERSION__: JSON.stringify(pkg.version),
     },
     plugins: [
-      htmlVariantPlugin(activeMeta, activeVariant, isDesktopBuild),
+      htmlVariantPlugin(htmlMeta, activeVariant, isDesktopBuild),
       polymarketPlugin(),
       rssProxyPlugin(),
       youtubeLivePlugin(),
