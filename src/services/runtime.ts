@@ -205,6 +205,17 @@ export function withBase(path: string): string {
   return `${DEPLOY_BASE}${path}`;
 }
 
+/**
+ * The deployment base path prefix (e.g. "/monitor", no trailing slash) or "" when
+ * the app is served at root ("/"), desktop, or standalone/prod. Intended to be
+ * concatenated in front of a root-absolute "/api/..." path so generated RPC
+ * clients route through the reverse proxy under e.g. /monitor/api/*.
+ * No-op (returns "") when base is "/".
+ */
+export function getDeployBasePath(): string {
+  return DEPLOY_BASE;
+}
+
 export function toApiUrl(path: string): string {
   if (!path.startsWith('/')) {
     return path;

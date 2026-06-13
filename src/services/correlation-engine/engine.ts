@@ -9,6 +9,7 @@ import type {
 } from './types';
 import { haversineKm } from '@/utils/distance';
 import { IntelligenceServiceClient } from '@/generated/client/worldmonitor/intelligence/v1/service_client';
+import { getRpcBaseUrl } from '@/services/rpc-client';
 
 const LLM_SCORE_THRESHOLD = 60;
 const LLM_CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
@@ -29,8 +30,9 @@ export class CorrelationEngine {
   private llmInFlight = 0;
 
   constructor() {
-    // Use '' base URL — requests go to current origin, same as other panels
-    this.intelligenceClient = new IntelligenceServiceClient('');
+    // Use the shared RPC base URL so requests honor the deployment base path
+    // (e.g. /monitor/api/...) instead of leaking to the absolute /api/ origin.
+    this.intelligenceClient = new IntelligenceServiceClient(getRpcBaseUrl());
   }
 
   registerAdapter(adapter: DomainAdapter): void {
