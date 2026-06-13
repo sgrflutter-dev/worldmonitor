@@ -35,6 +35,11 @@ http {
   server {
     listen 8080;
 
+    # Behind Traefik (TLS terminated upstream), nginx must emit RELATIVE redirects,
+    # else `return 308 /monitor/` becomes Location: http://host:8080/monitor/ —
+    # leaking the internal port + http → a dead link for /monitor (no slash).
+    absolute_redirect off;
+
     # Built frontend lives under html/monitor/ so that the Vite base ('/monitor/')
     # asset URLs map 1:1 onto real files (mirrors the blog /blog/ pattern).
     root /usr/share/nginx/html;
