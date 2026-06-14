@@ -24,9 +24,11 @@
   --gt-font-serif: 'Lora', Georgia, 'Times New Roman', serif;
 }
 
-/* Map Good Thoughts tokens onto World Monitor's token layer.
-   Light surfaces, deep-green accent, lavender-white backgrounds. */
-:root[data-gt-shell],
+/* Map Good Thoughts tokens onto World Monitor's token layer — ONLY in explicit
+   light mode. Monitor is dark-by-design (map/intelligence dashboard); the bare
+   :root[data-gt-shell] selector used to lighten the chrome even in dark mode,
+   which clashed with the dark map. Scoped to [data-theme="light"] so dark stays
+   fully dark and a user who toggles light still gets the Good Thoughts palette. */
 :root[data-gt-shell][data-theme="light"] {
   --bg: #faf8ff;
   --bg-secondary: #f2f3ff;
@@ -46,14 +48,16 @@
   --panel-border: #dae2fd;
 }
 
-/* Good Thoughts uses Inter (body) + Lora (display/serif). */
-:root[data-gt-shell] body,
-:root[data-gt-shell] {
+/* Good Thoughts uses Inter (body) + Lora (display/serif) — light mode only, so
+   the dark dashboard keeps its own (mono) typographic voice. The shared shell
+   nav carries Inter/Lora via its own inline CSS regardless. */
+:root[data-gt-shell][data-theme="light"] body,
+:root[data-gt-shell][data-theme="light"] {
   font-family: var(--gt-font-body);
 }
 
-/* Deep-green accent for interactive/brand elements that read --accent. */
-:root[data-gt-shell] .site-footer-name {
+/* Deep-green accent for interactive/brand elements that read --accent (light). */
+:root[data-gt-shell][data-theme="light"] .site-footer-name {
   color: var(--gt-primary);
   font-family: var(--gt-font-serif);
   letter-spacing: 0.02em;

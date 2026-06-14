@@ -255,6 +255,16 @@
       }
       /* Push the app below the ~56px fixed nav (stage/shell only). */
       :root[data-gt-shell] body{padding-top:56px}
+      /* Monitor is dark-by-design: dark treatment for the shared product nav so
+         it reads as part of the dark dashboard, not a clashing light bar. The
+         filled green Sign-in (#004532 + white) stays — it pops fine on dark. */
+      :root[data-gt-shell] .gt-shell-nav{background:rgba(15,23,20,0.9);box-shadow:none;border-bottom:1px solid rgba(255,255,255,0.08)}
+      :root[data-gt-shell] .gt-shell-nav__brand{color:#a6f2d1}
+      :root[data-gt-shell] .gt-shell-nav__link{color:#cbd5e1}
+      :root[data-gt-shell] .gt-shell-nav__link--active{color:#a6f2d1;border-bottom-color:#a6f2d1}
+      :root[data-gt-shell] .gt-shell-nav__name{color:#e8eaed}
+      :root[data-gt-shell] .gt-shell-nav__logout{color:#cbd5e1}
+      :root[data-gt-shell] .gt-shell-nav__logout:hover{background:rgba(255,255,255,0.08)}
     </style>
     <nav class="gt-shell-nav" aria-label="Good Thoughts sections">
       <div class="gt-shell-nav__inner">
@@ -262,9 +272,9 @@
         <div class="gt-shell-nav__links">
           <a class="gt-shell-nav__link" href="/">Finance</a>
           <a class="gt-shell-nav__link" href="/markets">Markets</a>
-          <a class="gt-shell-nav__link" href="/ipo">IPO</a>
-          <a class="gt-shell-nav__link" href="/blog">Blog</a>
-          <a class="gt-shell-nav__link gt-shell-nav__link--active" href="/monitor" aria-current="page">Monitor</a>
+          <a class="gt-shell-nav__link" href="/ipo/">IPO</a>
+          <a class="gt-shell-nav__link" href="/blog/">Blog</a>
+          <a class="gt-shell-nav__link gt-shell-nav__link--active" href="/monitor/" aria-current="page">Monitor</a>
         </div>
         <div class="gt-shell-nav__identity" id="gtIdentity">
           <a class="gt-shell-nav__signin" href="/auth">Sign in</a>

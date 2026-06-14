@@ -10,11 +10,12 @@ import './styles/goodthoughts-theme.css';
   try {
     const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
     if (base && typeof document !== 'undefined') {
+      // Flag the document so the shared Good Thoughts shell nav shows. We do NOT
+      // force a light theme: Monitor is a dark-by-design map/intelligence
+      // dashboard, so it keeps its dark theme and the shell nav gets a matching
+      // dark treatment (see .gt-shell-nav in the HTML) — that's what makes it
+      // read as part of the product instead of a clashing light bar.
       document.documentElement.setAttribute('data-gt-shell', '');
-      // Force the light surface to match the shell's siblings.
-      if (!document.documentElement.dataset.theme) {
-        document.documentElement.dataset.theme = 'light';
-      }
     }
   } catch { /* no-op */ }
 })();
