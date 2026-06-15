@@ -255,6 +255,10 @@
       }
       /* Push the app below the ~56px fixed nav (stage/shell only). */
       :root[data-gt-shell] body{padding-top:56px}
+      /* #app is position:absolute;top:0, so it ignores the body padding above and
+         renders UNDER the fixed nav. Offset it directly so the dashboard starts
+         below the nav instead of overlapping it. */
+      :root[data-gt-shell] #app{top:56px;min-height:calc(100vh - 56px)}
       /* Monitor is dark-by-design: dark treatment for the shared product nav so
          it reads as part of the dark dashboard, not a clashing light bar. The
          filled green Sign-in (#004532 + white) stays — it pops fine on dark. */
