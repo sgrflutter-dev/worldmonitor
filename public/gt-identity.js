@@ -11,6 +11,11 @@
 (function () {
   var KEY = 'gt-auth';
 
+  // Enable the shared shell styling on EVERY page that loads this script (the
+  // dashboard's main.ts sets this, but the settings/live-channels subpages use
+  // different entry scripts — without it the gt nav + ticker stay unstyled).
+  document.documentElement.setAttribute('data-gt-shell', '');
+
   function readUser() {
     try {
       var raw = localStorage.getItem(KEY);
@@ -77,3 +82,14 @@
     render();
   }
 })();
+
+// --- Shared market ticker (Good Thoughts shell) ------------------------------
+(function(){
+      var scroll=document.getElementById('gtTickerScroll'),dot=document.getElementById('gtTickerDot'),liveEl=document.getElementById('gtTickerLive'),band=document.getElementById('gtTicker');
+      if(!scroll||!band)return;
+      function mktOpen(){var n=new Date();var ist=n.getUTCHours()*60+n.getUTCMinutes()+330;var day=(n.getUTCDay()+Math.floor(ist/1440))%7;var m=((ist%1440)+1440)%1440;if(day===0||day===6)return false;return m>=555&&m<=930;}
+      function fmt(it){var pos=(it.change_percent==null?0:it.change_percent)>=0;var price=it.price!=null?Number(it.price).toLocaleString('en-IN',{maximumFractionDigits:2}):'-';var pct=it.change_percent!=null?((it.change_percent>0?'+':'')+Number(it.change_percent).toFixed(2)+'%'):'';var sym=(it.symbol&&it.symbol.charAt(0)==='^')?it.name:it.symbol;var h='<span class="gt-ticker__item"><span class="gt-ticker__sym">'+sym+'</span><span class="gt-ticker__price">'+price+'</span>';if(pct)h+='<span class="'+(pos?'gt-ticker__pos':'gt-ticker__neg')+'">'+(pos?'▲':'▼')+' '+pct+'</span>';return h+'</span>';}
+      function render(items){if(!items.length){band.style.display='none';return;}band.style.display='block';var d=items.concat(items);scroll.innerHTML=d.map(fmt).join('');scroll.style.animation='gtTickerScroll '+Math.max(30,items.length*3.5)+'s linear infinite';var live=mktOpen();dot.style.background=live?'#22c55e':'#ef4444';liveEl.textContent=live?'LIVE':'CLOSED';}
+      function load(){fetch('/api/v1/market/ticker').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d)return;render([].concat(d.indices||[],d.stocks||[]));}).catch(function(){});}
+      load();setInterval(load,10000);
+    })();

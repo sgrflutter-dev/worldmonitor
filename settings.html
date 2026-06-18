@@ -26,7 +26,19 @@
       :root[data-gt-shell] .gt-shell-nav__logout:hover{background:rgba(209,250,229,0.6)}
       @media (max-width:639px){:root[data-gt-shell] .gt-shell-nav__name{display:none}}
       @media (max-width:767px){:root[data-gt-shell] .gt-shell-nav__links{display:none}}
-      :root[data-gt-shell] body{padding-top:56px}
+      :root[data-gt-shell] body{padding-top:88px}
+      .gt-ticker{display:none}
+      :root[data-gt-shell] .gt-ticker{display:block;position:fixed;top:56px;left:0;right:0;height:32px;z-index:99999;background:#022a20;overflow:hidden;border-top:1px solid rgba(255,255,255,0.06);box-sizing:border-box}
+      :root[data-gt-shell] .gt-ticker__badge{position:absolute;top:0;bottom:0;left:0;z-index:2;display:flex;align-items:center;gap:6px;padding:0 12px;background:#022a20;border-right:1px solid rgba(255,255,255,0.1);font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+      :root[data-gt-shell] .gt-ticker__dot{width:8px;height:8px;border-radius:9999px;display:inline-block}
+      :root[data-gt-shell] .gt-ticker__live{font-size:10px;font-weight:600;letter-spacing:0.08em;color:#cbd5d3}
+      :root[data-gt-shell] .gt-ticker__scroll{display:inline-flex;align-items:center;height:100%;width:max-content;white-space:nowrap;will-change:transform}
+      :root[data-gt-shell] .gt-ticker__item{display:inline-flex;align-items:center;gap:6px;padding:0 16px;font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+      :root[data-gt-shell] .gt-ticker__sym{color:#9fb4ab;font-weight:500;font-size:12px}
+      :root[data-gt-shell] .gt-ticker__price{color:#fff;font-weight:600;font-size:12px}
+      :root[data-gt-shell] .gt-ticker__pos{color:#34d399;font-weight:500;font-size:12px}
+      :root[data-gt-shell] .gt-ticker__neg{color:#f87171;font-weight:500;font-size:12px}
+      @keyframes gtTickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
       /* Monitor is dark-by-design: dark treatment for the shared product nav so
          it reads as part of the dark dashboard, not a clashing light bar. The
          filled green Sign-in (#004532 + white) stays — it pops fine on dark. */
@@ -53,6 +65,10 @@
         </div>
       </div>
     </nav>
+    <div class="gt-ticker" id="gtTicker" aria-hidden="true">
+      <div class="gt-ticker__badge"><span class="gt-ticker__dot" id="gtTickerDot"></span><span class="gt-ticker__live" id="gtTickerLive">LIVE</span></div>
+      <div class="gt-ticker__scroll" id="gtTickerScroll"></div>
+    </div>
     <script src="/gt-identity.js"></script>
     <div class="settings-shell">
       <div class="settings-titlebar"></div>
