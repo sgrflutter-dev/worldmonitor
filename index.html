@@ -214,9 +214,9 @@
       .gt-shell-nav{display:none}
       :root[data-gt-shell] .gt-shell-nav{
         display:block;position:fixed;top:0;left:0;right:0;z-index:100000;
-        background:rgba(236,253,245,0.8);
+        background:rgba(15,23,20,0.9);
         -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
-        box-shadow:0 1px 2px 0 rgba(6,78,59,0.05);
+        box-shadow:none;border-bottom:1px solid rgba(255,255,255,0.08);
       }
       :root[data-gt-shell] .gt-shell-nav__inner{
         max-width:1400px;margin:0 auto;display:flex;align-items:center;
@@ -225,30 +225,31 @@
       :root[data-gt-shell] .gt-shell-nav__brand{
         flex-shrink:0;font-family:'Lora',Georgia,'Times New Roman',serif;
         font-weight:700;font-size:1.5rem;letter-spacing:-0.01em;
-        color:#004532;text-decoration:none;
+        color:#a6f2d1;text-decoration:none;
       }
       :root[data-gt-shell] .gt-shell-nav__links{display:flex;align-items:center;gap:28px}
       :root[data-gt-shell] .gt-shell-nav__link{
         font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
         font-size:0.75rem;line-height:1;letter-spacing:0.05em;text-transform:uppercase;
-        text-decoration:none;color:#2a3346;font-weight:500;padding-bottom:2px;
+        text-decoration:none;color:#cbd5e1;font-weight:500;padding-bottom:2px;
         border-bottom:2px solid transparent;transition:color .15s ease;
       }
+      :root[data-gt-shell] .gt-shell-nav__link:hover{color:#a6f2d1}
       :root[data-gt-shell] .gt-shell-nav__link--active{
-        color:#004532;font-weight:700;border-bottom:2px solid #004532;
+        color:#a6f2d1;font-weight:700;border-bottom:2px solid #a6f2d1;
       }
       :root[data-gt-shell] .gt-shell-nav__signin{
         flex-shrink:0;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
-        font-size:0.75rem;line-height:1;letter-spacing:0.05em;text-transform:uppercase;
-        font-weight:600;text-decoration:none;color:#004532;
-        padding:6px 12px;border-radius:8px;transition:background .15s ease;
+        font-size:0.8125rem;line-height:1;letter-spacing:0.05em;text-transform:uppercase;
+        font-weight:700;text-decoration:none;color:#fff;background:#004532;
+        padding:8px 16px;border-radius:8px;transition:background .15s ease;
       }
       :root[data-gt-shell] .gt-shell-nav__signin:hover{opacity:.9}
       :root[data-gt-shell] .gt-shell-nav__identity{display:flex;align-items:center;gap:10px;flex-shrink:0}
-      :root[data-gt-shell] .gt-shell-nav__name{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:0.875rem;font-weight:500;color:#131b2e}
+      :root[data-gt-shell] .gt-shell-nav__name{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:0.875rem;font-weight:500;color:#e8eaed}
       :root[data-gt-shell] .gt-shell-nav__avatar{width:36px;height:36px;border-radius:9999px;display:grid;place-items:center;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:0.75rem;font-weight:700;color:#fff;background:#004532}
-      :root[data-gt-shell] .gt-shell-nav__logout{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:0.75rem;line-height:1;letter-spacing:0.05em;text-transform:uppercase;font-weight:600;color:#2a3346;background:none;border:none;cursor:pointer;padding:6px 12px;border-radius:8px}
-      :root[data-gt-shell] .gt-shell-nav__logout:hover{background:rgba(209,250,229,0.6)}
+      :root[data-gt-shell] .gt-shell-nav__logout{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:0.75rem;line-height:1;letter-spacing:0.05em;text-transform:uppercase;font-weight:600;color:#cbd5e1;background:none;border:none;cursor:pointer;padding:6px 12px;border-radius:8px}
+      :root[data-gt-shell] .gt-shell-nav__logout:hover{background:rgba(255,255,255,0.08)}
       @media (max-width:639px){:root[data-gt-shell] .gt-shell-nav__name{display:none}}
       @media (max-width:767px){
         :root[data-gt-shell] .gt-shell-nav__links{display:none}
