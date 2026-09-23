@@ -348,6 +348,13 @@ export class PanelLayoutManager implements AppModule {
         </div>
         <nav>
           <a href="https://goodthoughts.in" target="_blank" rel="noopener">Good Thoughts</a>
+          <a href="https://goodthoughts.in/about" target="_blank" rel="noopener">About</a>
+          <a href="https://goodthoughts.in/contact" target="_blank" rel="noopener">Contact</a>
+          <a href="https://goodthoughts.in/privacy" target="_blank" rel="noopener">Privacy</a>
+          <a href="https://goodthoughts.in/terms" target="_blank" rel="noopener">Terms</a>
+          <a href="https://goodthoughts.in/disclaimer" target="_blank" rel="noopener">Disclaimer</a>
+          <a href="https://goodthoughts.in/cookies" target="_blank" rel="noopener">Cookies</a>
+          <a href="https://goodthoughts.in/payment-policy" target="_blank" rel="noopener">Payment Policy</a>
         </nav>
         <span class="site-footer-copy">&copy; ${new Date().getFullYear()} World Monitor</span>
       </footer>
