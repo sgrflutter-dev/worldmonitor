@@ -338,25 +338,92 @@ export class PanelLayoutManager implements AppModule {
         <div class="panels-grid" id="panelsGrid"></div>
         <button class="search-mobile-fab" id="searchMobileFab" aria-label="Search">\u{1F50D}</button>
       </div>
-      <footer class="site-footer">
-        <div class="site-footer-brand">
-          <img src="/favico/favicon-32x32.png" alt="" width="28" height="28" class="site-footer-icon" />
-          <div class="site-footer-brand-text">
-            <span class="site-footer-name">WORLD MONITOR</span>
-            <span class="site-footer-sub">by Someone.ceo</span>
+      <footer class="site-footer site-footer-wide">
+        <div class="site-footer-row">
+          <div class="site-footer-brand">
+            <img src="/favico/favicon-32x32.png" alt="" width="28" height="28" class="site-footer-icon" />
+            <div class="site-footer-brand-text">
+              <span class="site-footer-name">WORLD MONITOR</span>
+              <span class="site-footer-sub">by Someone.ceo</span>
+            </div>
           </div>
+          <nav>
+          <a href="/">Good Thoughts</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/disclaimer">Disclaimer</a>
+          <a href="/cookies">Cookies</a>
+          <a href="/payment-policy">Payment Policy</a>
+          </nav>
+          <span class="site-footer-copy">&copy; ${new Date().getFullYear()} World Monitor</span>
         </div>
-        <nav>
-          <a href="https://goodthoughts.in" target="_blank" rel="noopener">Good Thoughts</a>
-          <a href="https://goodthoughts.in/about" target="_blank" rel="noopener">About</a>
-          <a href="https://goodthoughts.in/contact" target="_blank" rel="noopener">Contact</a>
-          <a href="https://goodthoughts.in/privacy" target="_blank" rel="noopener">Privacy</a>
-          <a href="https://goodthoughts.in/terms" target="_blank" rel="noopener">Terms</a>
-          <a href="https://goodthoughts.in/disclaimer" target="_blank" rel="noopener">Disclaimer</a>
-          <a href="https://goodthoughts.in/cookies" target="_blank" rel="noopener">Cookies</a>
-          <a href="https://goodthoughts.in/payment-policy" target="_blank" rel="noopener">Payment Policy</a>
-        </nav>
-        <span class="site-footer-copy">&copy; ${new Date().getFullYear()} World Monitor</span>
+        <details class="site-footer-more">
+          <summary>All Good Thoughts links &#9662;</summary>
+          <div class="gt-foot-grid">
+          <div class="gt-foot-col"><div class="gt-foot-title">Explore</div>
+            <a href="/">Finance</a>
+            <a href="/markets">Markets</a>
+            <a href="/ipo">IPO</a>
+            <a href="/blog/">Blog</a>
+            <a href="/monitor">World Monitor</a>
+          </div>
+          <div class="gt-foot-col"><div class="gt-foot-title">Finance Tools</div>
+            <a href="/screens">Screens</a>
+            <a href="/top-picks">Top Picks</a>
+            <a href="/watchlists">Watchlists</a>
+            <a href="/compare">Compare</a>
+            <a href="/indices">Indices</a>
+          </div>
+          <div class="gt-foot-col"><div class="gt-foot-title">IPO</div>
+            <a href="/ipo/full_list">All IPOs</a>
+            <a href="/ipo/tools/ipo-scorecard">IPO Scorecard</a>
+            <a href="/ipo/tools/ipo-compare">Compare IPOs</a>
+            <a href="/ipo/resources/ipo-guide">IPO Guide</a>
+            <a href="/ipo/resources/investment-tips">Investment Tips</a>
+            <a href="/ipo/resources/faq">FAQ</a>
+          </div>
+          <div class="gt-foot-col"><div class="gt-foot-title">Government Portals</div>
+            <a href="https://nfra.gov.in/" target="_blank" rel="noopener noreferrer">NFRA</a>
+            <a href="https://www.mca.gov.in/" target="_blank" rel="noopener noreferrer">MCA</a>
+            <a href="https://nclat.nic.in/" target="_blank" rel="noopener noreferrer">NCLAT</a>
+            <a href="https://nclt.gov.in/" target="_blank" rel="noopener noreferrer">NCLT</a>
+            <a href="https://www.india.gov.in/" target="_blank" rel="noopener noreferrer">National Portal of India</a>
+            <a href="https://www.mygov.in/" target="_blank" rel="noopener noreferrer">MyGov</a>
+            <a href="https://www.meity.gov.in/" target="_blank" rel="noopener noreferrer">MeitY</a>
+            <a href="https://www.startupindia.gov.in/" target="_blank" rel="noopener noreferrer">Startup India</a>
+          </div>
+          <div class="gt-foot-col"><div class="gt-foot-title">Stock Exchanges</div>
+            <a href="https://www.nseindia.com/" target="_blank" rel="noopener noreferrer">NSE India</a>
+            <a href="https://www.bseindia.com/" target="_blank" rel="noopener noreferrer">BSE India</a>
+            <a href="https://mcxindia.com/" target="_blank" rel="noopener noreferrer">MCX</a>
+            <a href="https://www.msei.in/" target="_blank" rel="noopener noreferrer">MSE India</a>
+            <a href="https://www.amfiindia.com/" target="_blank" rel="noopener noreferrer">AMFI</a>
+          </div>
+          <div class="gt-foot-col"><div class="gt-foot-title">Regulators</div>
+            <a href="https://www.sebi.gov.in/" target="_blank" rel="noopener noreferrer">SEBI</a>
+            <a href="https://www.rbi.org.in/" target="_blank" rel="noopener noreferrer">RBI</a>
+            <a href="https://irdai.gov.in/" target="_blank" rel="noopener noreferrer">IRDAI</a>
+          </div>
+          <div class="gt-foot-col"><div class="gt-foot-title">Resources</div>
+            <a href="https://www.cdslindia.com/" target="_blank" rel="noopener noreferrer">CDSL</a>
+            <a href="https://nsdl.co.in/" target="_blank" rel="noopener noreferrer">NSDL</a>
+            <a href="/monitor">World Monitor</a>
+            <a href="/ipo">IPO Tracker</a>
+          </div>
+          <div class="gt-foot-col"><div class="gt-foot-title">Company &amp; Legal</div>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/cookies">Cookies</a>
+            <a href="/payment-policy">Payment Policy</a>
+          </div>
+          </div>
+          <div class="gt-foot-fine"><span><a href="https://www.facebook.com/goodipos" target="_blank" rel="noopener noreferrer">Facebook</a> <a href="https://twitter.com/goodipos" target="_blank" rel="noopener noreferrer">Twitter</a> <a href="https://www.linkedin.com/company/goodipos" target="_blank" rel="noopener noreferrer">LinkedIn</a> <a href="https://www.instagram.com/goodipos" target="_blank" rel="noopener noreferrer">Instagram</a></span><span>&copy; ${new Date().getFullYear()} Good Thoughts. All rights reserved. &middot; Built by <a href="https://krakelabsindia.com/" target="_blank" rel="noopener noreferrer">KLI</a></span></div>
+        </details>
       </footer>
     `;
 
