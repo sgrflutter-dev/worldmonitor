@@ -361,30 +361,30 @@ export class PanelLayoutManager implements AppModule {
         </div>
         <details class="site-footer-more">
           <summary>All Good Thoughts links &#9662;</summary>
-          <div class="gt-foot-grid">
-          <div class="gt-foot-col"><div class="gt-foot-title">Explore</div>
+          <div class="gt-foot-body">
+          <div class="gt-foot-row"><div class="gt-foot-title">Explore</div><div class="gt-foot-links">
             <a href="/">Finance</a>
             <a href="/markets">Markets</a>
             <a href="/ipo">IPO</a>
             <a href="/blog/">Blog</a>
             <a href="/monitor">World Monitor</a>
-          </div>
-          <div class="gt-foot-col"><div class="gt-foot-title">Finance Tools</div>
+          </div></div>
+          <div class="gt-foot-row"><div class="gt-foot-title">Finance Tools</div><div class="gt-foot-links">
             <a href="/screens">Screens</a>
             <a href="/top-picks">Top Picks</a>
             <a href="/watchlists">Watchlists</a>
             <a href="/compare">Compare</a>
             <a href="/indices">Indices</a>
-          </div>
-          <div class="gt-foot-col"><div class="gt-foot-title">IPO</div>
+          </div></div>
+          <div class="gt-foot-row"><div class="gt-foot-title">IPO</div><div class="gt-foot-links">
             <a href="/ipo/full_list">All IPOs</a>
             <a href="/ipo/tools/ipo-scorecard">IPO Scorecard</a>
             <a href="/ipo/tools/ipo-compare">Compare IPOs</a>
             <a href="/ipo/resources/ipo-guide">IPO Guide</a>
             <a href="/ipo/resources/investment-tips">Investment Tips</a>
             <a href="/ipo/resources/faq">FAQ</a>
-          </div>
-          <div class="gt-foot-col"><div class="gt-foot-title">Government Portals</div>
+          </div></div>
+          <div class="gt-foot-row"><div class="gt-foot-title">Government Portals</div><div class="gt-foot-links">
             <a href="https://nfra.gov.in/" target="_blank" rel="noopener noreferrer">NFRA</a>
             <a href="https://www.mca.gov.in/" target="_blank" rel="noopener noreferrer">MCA</a>
             <a href="https://nclat.nic.in/" target="_blank" rel="noopener noreferrer">NCLAT</a>
@@ -393,34 +393,25 @@ export class PanelLayoutManager implements AppModule {
             <a href="https://www.mygov.in/" target="_blank" rel="noopener noreferrer">MyGov</a>
             <a href="https://www.meity.gov.in/" target="_blank" rel="noopener noreferrer">MeitY</a>
             <a href="https://www.startupindia.gov.in/" target="_blank" rel="noopener noreferrer">Startup India</a>
-          </div>
-          <div class="gt-foot-col"><div class="gt-foot-title">Stock Exchanges</div>
+          </div></div>
+          <div class="gt-foot-row"><div class="gt-foot-title">Stock Exchanges</div><div class="gt-foot-links">
             <a href="https://www.nseindia.com/" target="_blank" rel="noopener noreferrer">NSE India</a>
             <a href="https://www.bseindia.com/" target="_blank" rel="noopener noreferrer">BSE India</a>
             <a href="https://mcxindia.com/" target="_blank" rel="noopener noreferrer">MCX</a>
             <a href="https://www.msei.in/" target="_blank" rel="noopener noreferrer">MSE India</a>
             <a href="https://www.amfiindia.com/" target="_blank" rel="noopener noreferrer">AMFI</a>
-          </div>
-          <div class="gt-foot-col"><div class="gt-foot-title">Regulators</div>
+          </div></div>
+          <div class="gt-foot-row"><div class="gt-foot-title">Regulators</div><div class="gt-foot-links">
             <a href="https://www.sebi.gov.in/" target="_blank" rel="noopener noreferrer">SEBI</a>
             <a href="https://www.rbi.org.in/" target="_blank" rel="noopener noreferrer">RBI</a>
             <a href="https://irdai.gov.in/" target="_blank" rel="noopener noreferrer">IRDAI</a>
-          </div>
-          <div class="gt-foot-col"><div class="gt-foot-title">Resources</div>
+          </div></div>
+          <div class="gt-foot-row"><div class="gt-foot-title">Resources</div><div class="gt-foot-links">
             <a href="https://www.cdslindia.com/" target="_blank" rel="noopener noreferrer">CDSL</a>
             <a href="https://nsdl.co.in/" target="_blank" rel="noopener noreferrer">NSDL</a>
             <a href="/monitor">World Monitor</a>
             <a href="/ipo">IPO Tracker</a>
-          </div>
-          <div class="gt-foot-col"><div class="gt-foot-title">Company &amp; Legal</div>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-            <a href="/disclaimer">Disclaimer</a>
-            <a href="/cookies">Cookies</a>
-            <a href="/payment-policy">Payment Policy</a>
-          </div>
+          </div></div>
           </div>
           <div class="gt-foot-fine"><span><a href="https://www.facebook.com/goodipos" target="_blank" rel="noopener noreferrer">Facebook</a> <a href="https://twitter.com/goodipos" target="_blank" rel="noopener noreferrer">Twitter</a> <a href="https://www.linkedin.com/company/goodipos" target="_blank" rel="noopener noreferrer">LinkedIn</a> <a href="https://www.instagram.com/goodipos" target="_blank" rel="noopener noreferrer">Instagram</a></span><span>&copy; ${new Date().getFullYear()} Good Thoughts. All rights reserved. &middot; Built by <a href="https://krakelabsindia.com/" target="_blank" rel="noopener noreferrer">KLI</a></span></div>
         </details>
