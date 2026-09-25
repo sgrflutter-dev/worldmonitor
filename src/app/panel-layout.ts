@@ -367,6 +367,7 @@ export class PanelLayoutManager implements AppModule {
             <a href="/ipo">IPO</a>
             <a href="/blog/">Blog</a>
             <a href="/monitor">World Monitor</a>
+            <a href="/research/">Research</a>
           </div>
           <div class="gt-foot-col"><div class="gt-foot-title">Finance Tools</div>
             <a href="/screens">Screens</a>
@@ -374,6 +375,7 @@ export class PanelLayoutManager implements AppModule {
             <a href="/watchlists">Watchlists</a>
             <a href="/compare">Compare</a>
             <a href="/indices">Indices</a>
+            <a href="/research/ask">Good AI</a>
           </div>
           <div class="gt-foot-col"><div class="gt-foot-title">IPO</div>
             <a href="/ipo/full_list">All IPOs</a>
